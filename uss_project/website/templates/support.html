@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script 
+        src = "https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity = "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<style>
+		body {
+			background-repeat: no-repeat;
+			font-family: Arial, sans-serif;
+			color: #333;
+		}
+		
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+			font-size: 36px;
+		}
+		
+		.mainbody {
+			max-width: 1500px;
+			margin: 0 auto;
+			background-color: rgba(255,255,255,0.7);
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		}
+		
+		.section {
+			margin-bottom: 20px;
+		}
+		
+		.section h2 {
+			margin-top: 0;
+			cursor: pointer;
+		}
+		
+		.section p {
+			display: none;
+		}
+		
+		.section.active p {
+			display: block;
+			padding: 5px;
+			background-color: #f5f5f5;
+			border-radius: 5px;
+		}
+		
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            width: 370px;
+        }
+
+        .wrapper .title {
+            background: #007bff;
+            color: white;
+            line-height: 2.5;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .wrapper .box {
+            border: 1px solid #efefef;
+            padding: 10px 15px;
+            min-height: 400px;
+            max-height: 400px;
+        }
+
+        .wrapper .box .item {
+            display: flex;
+            float: left;
+            margin: 10px 0;
+        }
+
+        .wrapper .box .item .icon {
+            background: #007bff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+        }
+
+        @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Poppins:wght@200;300&display=swap");
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        }
+        body {
+            background-image: url('https://www.pngall.com/wp-content/uploads/4/Support-PNG-Transparent-HD-Photo.png');
+            background-size: 1200px 810px;
+        }
+        
+        .container {
+        --light-color: #fff;
+        height: 420px;
+        width: 420px;
+        background: var(--light-color);
+        position: fixed;
+        bottom: 50px;
+        right: 10px;
+        box-shadow: 0px 0px 15px 0px black;
+        }
+        .chat-header {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0px 30px;
+        background-color: #0652c0;
+        color: var(--light-color);
+        font-size: 1.5rem;
+        }
+
+        .chat-header .logo {
+        height: 35px;
+        width: 35px;
+        box-shadow: 0px 0px 10px 0px black;
+        }
+        .chat-header img {
+        height: 100%;
+        width: 100%;
+        }
+        .chat-header .title {
+        padding-left: 10px;
+        }
+        .chat-body {
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        padding: 8px 10px;
+        align-items: flex-end;
+        overflow-y: auto;
+        }
+        .chat-input {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #ccc;
+        }
+        .input-sec {
+        flex: 9;
+        }
+        .send {
+        flex: 1;
+        padding-right: 4px;
+        }
+        #txtInput {
+        line-height: 30px;
+        padding: 8px 10px;
+        border: none;
+        outline: none;
+        caret-color: black;
+        font-size: 1rem;
+        width: 100%;
+        }
+
+        .chatbot-message,
+        .user-message {
+        padding: 8px;
+        background: #ccc;
+        margin: 5px;
+        width: max-content;
+        border-radius: 10px 3px 10px 10px;
+        }
+        .chatbot-message {
+        background: #0652c0;
+        color: var(--light-color);
+        align-self: flex-start;
+        border-radius: 10px 10px 3px 10px;
+        }
+	</style>
+</head>
+<body>
+    <div class = "form-group">
+    <h2>Frequently asked questions</h2>
+	<div class="mainbody" align = "left">
+		<div class="section">
+			<h2>How do I create an account?</h2>
+			<p>To create an account, click on the "Sign Up" button at the top of the page and follow the prompts to enter your information.</p>
+		</div>
+		
+		<div class="section">
+			<h2>How do I reset my master password?</h2>
+			<p>To reset your master password, you can go to profile page and change your password there.</p>
+		</div>
+		<div class="section">
+			<h2>What if I forget my master password?</h2>
+			<p>Then contact customer support for help. You would get link on your authorised email to change your password.</p>
+		</div>
+		<div class="section">
+			<h2>How do I contact customer support?</h2>
+			<p>To contact customer support, call us at 1800-1200-6563 or email us at csupportsafepass@gmail.com</p>
+		</div>
+        <div class = "section">
+            <h2>How do I delete my account?</h2>
+            <p>To delete your account, go to profile page and click the option of deleting the account.</p>
+	</div>
+	
+	<script>
+		var sections = document.querySelectorAll('.section');
+		
+		sections.forEach(function(section) {
+			section.addEventListener('click', function() {
+				section.classList.toggle('active');
+			});
+		});
+	</script>
+</div>
+<div class="container">
+    <div class="chat-header">
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/8649/8649595.png" alt="cwt" />
+      </div>
+      <div class="title">Chat-Bot</div>
+    </div>
+    <div class="chat-body"></div>
+    <div class="chat-input">
+      <div class="input-sec">
+        <input type="text" id="txtInput" placeholder="Enter your query" autofocus />
+      </div>
+      <div class="send">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCMx-Mv3nzZ4P9jg745fziKJbkiwxPqQ9MkQ&usqp=CAU" height = "36" width = "36" alt="send" />
+      </div>
+    </div>
+  </div>
+<script>
+
+    var responseObj = {
+        hello: "Hey ! How are you doing ?",
+        hey: "Hey! What's Up",
+        your_name: "My name is RoboSafe",
+        how_are_you: "Absolutely fine!",
+        who_are_you: "I am a ChatBot that helps you explore the platform",
+        can_do: "I can help you know more about the platform",
+        delete_account: "You can delete your account from your profile",
+        create_account: "Sign up to create a new account",
+        otp_not_received: "Try signing up again",
+        email_already_registered: "Try signing up with different email",
+        not_able_sign: "Follow proper rules to sign up",
+        not_able_log: "Account not verified, try signing up again",
+        is_it_safe: "Yes, we try to provide best security as possible!",
+        reset_password: "Change your password from your profile",
+        forgot_password: "Maybe you can contact customer support",
+        how_work: "Can't provide information about that!",
+        contact_support: "email us at csupportsafepass@gmail.com",
+        contact_number: "call us at 1800-1200-6563",
+        today: new Date().toDateString(),
+        time: new Date().toLocaleTimeString(),
+      };
+
+    function permute(nums) {
+        let result = [];
+        if (nums.length === 0) return [];
+        if (nums.length === 1) return [nums];
+        for (let i = 0; i < nums.length; i++) {
+            const currentNum = nums[i];
+            const remainingNums = nums.slice(0, i).concat(nums.slice(i + 1));
+            const remainingNumsPermuted = permute(remainingNums);
+            for (let j = 0; j < remainingNumsPermuted.length; j++) {
+                const permutedArray = [currentNum].concat(remainingNumsPermuted[j]);
+                result.push(permutedArray);
+            }
+        }
+        return result;
+        }
+
+    function generateResponse(input){
+        input = input.replace('?', '').replace('!', '').trim().toLowerCase();
+        let array = permute(input.split(" "))
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].length == 1){
+                if (responseObj[array[i][0]] != undefined){
+                    return responseObj[array[i][0]]
+                }
+            }
+            else{
+                let str = array[i][0] + "_" + array[i][1];
+                let str1 = array[i][0] + "_" + array[i][1] + "_" + array[i][2];
+                if (responseObj[str] != undefined){
+                    return responseObj[str];
+                }
+                else if (responseObj[str1] != undefined){
+                  return responseObj[str1];
+                }
+            }
+        }
+        var arr = ["I am not clear about what you are asking!", "Maybe you can contact customer support", "Please try something else!", "Don't quite got that"];
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+      const chatBody = document.querySelector(".chat-body");
+      const txtInput = document.querySelector("#txtInput");
+      const send = document.querySelector(".send");
+      
+      send.addEventListener("click", () => renderUserMessage());
+      
+      txtInput.addEventListener("keyup", (event) => {
+        if (event.keyCode === 13) {
+          renderUserMessage();
+        }
+      });
+      const renderUserMessage = () => {
+        const userInput = txtInput.value;
+        renderMessageEle(userInput, "user");
+        txtInput.value = "";
+        setTimeout(() => {
+          renderChatbotResponse(userInput);
+          setScrollPosition();
+        }, 600);
+      };
+      
+      const renderChatbotResponse = (userInput) => {
+        const res = getChatbotResponse(userInput);
+        renderMessageEle(res);
+      };
+      
+      const renderMessageEle = (txt, type) => {
+        let className = "user-message";
+        if (type !== "user") {
+          className = "chatbot-message";
+        }
+        const messageEle = document.createElement("div");
+        const txtNode = document.createTextNode(txt);
+        messageEle.classList.add(className);
+        messageEle.append(txtNode);
+        chatBody.append(messageEle);
+      };
+      
+      const getChatbotResponse = (userInput) => {
+        return generateResponse(userInput);
+      };
+      
+      const setScrollPosition = () => {
+        if (chatBody.scrollHeight > 0) {
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+      };
+</script>
+</body>
+</html>

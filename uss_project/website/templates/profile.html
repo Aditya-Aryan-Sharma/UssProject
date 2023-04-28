@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>{% block title %}Profile{% endblock %}</title>
+        <style>
+        .cap {
+            width: 270px;
+            padding: 10px;
+            border: 3px solid gray;
+        }
+        a:hover {
+            background-color: black;
+        }
+        body
+        {  
+            background-color:#000000;  
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .column {
+          float: left;
+          flex: 50%;
+          padding: 100px;
+          bottom: auto;
+          left: 250px;
+        }
+        .content{
+            margin-right: 0;
+            padding-right: 0;
+            position: fixed;
+            bottom: auto;
+            left: 360px;
+        }
+        .sidecontent{
+            margin-right: 0;
+            padding-right: 0;
+            position: fixed;
+            bottom: 500px;
+            right: 70px;
+        }
+        .sidebar {
+            background-color: #cdcccc;
+            width: 450px;
+            position: fixed;
+            height: 50%;
+            top: 100px;
+            right: 450px;
+            overflow-x: hidden;
+            padding-top: 90px;
+            padding-bottom: 20px;
+            padding-left: 120px
+        }
+        #sidebar h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        #sidebar p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #sidebar button {
+            background-color: #333;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+            <button
+              class = "navbar-toggler"
+              type = "button"
+              data-toggle = "collapse"
+              data-target = "#navbar"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class = "collapse navbar-collapse" id = "navbar">
+              <img src="..\static\fotor_2023-3-15_0_48_39.png" width="4%">
+              <div class = "navbar-nav navbar-right">
+                <a class = "nav-item nav-link" id="home" href="/" style = "color:rgb(255, 255, 255)"><b><h4>Home</h4></b></a>
+                <a class = "nav-item nav-link px-5" id="logout" href="/logout" style = "color:rgb(255, 255, 255)"><b><h4>Logout</h4></b></a>
+              </div>
+            </div>
+          </nav>
+            <div style="display: flex;">
+                <div style="width: 80%;" class = "content">
+                    <img src = "../static/images.jpg" alt = "profile photo" width = 300px height = auto>
+                </div>
+                <div class = "sidecontent">
+                    <div class="sidebar">
+                        <h1>User Profile</h1>
+                        <h3>Email: {{user.email}}</h3>
+                        <h3>Name: {{user.first_name}}</h3>
+                        <h3>Phone Number: Not Set</h3>
+                        <button>Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+            <canvas id="myCanvas" width = "1000" height = "800"></canvas>
+    </body>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var values = {{ scores|tojson }};
+        var barWidth = 50;
+        var barSpacing = 20;
+        var barColor = "blue";
+        var ctx = canvas.getContext("2d");
+        for (var i = 0; i < values.length; i++) {
+            var barHeight = values[i] * 1.25;
+            var x = i * (barWidth + barSpacing);
+            var y = canvas.height - barHeight;
+            ctx.fillStyle = barColor;
+            ctx.fillRect(x, y, barWidth, barHeight);
+        }
+    </script>
+</html>

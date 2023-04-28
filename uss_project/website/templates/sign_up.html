@@ -1,0 +1,134 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+  content %}
+
+  <style>  
+      body  
+      {  
+      background-image:url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v748-toon-131_1_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=c03f4e1df88801665806cbdbaef503d4");  
+      }
+      .content {
+          max-width: 350px;
+          margin: auto;
+          padding: 18px;
+          background: white;
+          padding-top: 5px;
+      }
+      .cap {
+          width: 270px;
+          padding: 10px;
+          border: 3px solid gray;
+          margin: 0;
+          content: "";
+          clear: both;
+          display: table;
+        }
+        .column {
+          float: left;
+          flex: 50%;
+          padding: 5px;
+        }
+  </style>
+  <div class = "content">
+  <form method="POST">
+    <h3 align="center">Sign Up</h3>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="firstName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        placeholder="Enter Name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="password1">Master Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password1"
+        name="password1"
+        placeholder="Enter password"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="password2">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password2"
+        name="password2"
+        placeholder="Confirm password"
+        required
+      />
+    </div>
+    <label for="captcha">Captcha Verification</label>
+      <div class = "cap">
+        <div class = "column">
+          <p id = text></p>
+        </div>
+        <div class = "column">
+          <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovRqOMzdCDE6cv2orlxPDAvw9IbE3fY9wSA&usqp=CAU" id = "refresh" height = 20 width = 20 alt = "refresh">
+        </div>
+      </div>
+    <input
+      type = "text"
+      class = "form-control"
+      id = "captcha-text"
+      name = "captcha-text"
+      placeholder = "Enter Captcha"
+      required
+    />
+    <p></p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% if error%}
+    <p><strong><i>{{error}}</i></strong></p>
+    {% endif%}
+  </form>
+  <script>
+    document.getElementById("refresh").addEventListener("click", refreshCaptcha);
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    function generateString(length) {
+        let result = ' ';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+    function refreshCaptcha(){
+      text = generateString(9);
+      document.getElementById("text").innerHTML = text;
+    }
+    var text = generateString(9);
+    document.getElementById("text").innerHTML = text;
+    var params = {
+      type: "POST",
+      success: success,
+      data:{
+        email: $("#email").val(),
+        firstName: $("#firstName").val(),
+        password1: $("#password1").val(),
+        password2: $("#password2").val(),
+        verified: "false"
+      }
+    }
+      if ($("#captcha-text").val() == text){
+        params.data.verified = "true";
+      }
+      $.ajax(params);
+  </script>
+</div>
+  {% endblock %}

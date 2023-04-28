@@ -1,0 +1,138 @@
+<style>  
+    body
+    {  
+        background-color:#faf9f6;  
+    }
+
+    .container{
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        background-size: 25px 25px;
+    }
+  
+    .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .keyboard button {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: #fff;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+    
+    .keyboard button:hover {
+        background-color: #eee;
+    }
+    
+    .keyboard button:active {
+        box-shadow: none;
+    }
+
+    .content {
+        max-width: 350px;
+        margin: auto;
+        padding: 18px;
+        padding-top: 7px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"></script>
+<div class = "content" >
+    <h2 align = "center">One time Verification</h2>
+    <div class = "form-group" align = "center">
+    <h3>An OTP has been sent to your email. Enter the OTP to continue with website.</h3>
+    <form method = "POST" id = "otp-form">
+        <label for = "otp">Enter Verification Code</label>
+        <input 
+            type = "number"
+            class = "form-control"
+            id = "otp"
+            name = "otp"
+            placeholder = "Enter Code"
+            style = "width: 300px;"
+        />
+        <p id="demo"></p>
+        <script>
+        var deadline = new Date().getTime() + 300000;
+        var x = setInterval(function() {
+        var now = new Date().getTime();
+        var t = deadline - now;
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((t % (1000 * 60)) / 1000);
+        document.getElementById("demo").innerHTML = days + "d " 
+        + hours + "h " + minutes + "m " + seconds + "s ";
+            if (t < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+                location.replace("/sign-up")
+            }
+        }, 1000);
+        </script>
+        <button type = "submit" align = "center" class = "btn btn-primary">Verify</button>
+    </form>
+    </div>
+    <div class = "container">
+        <h1 align = "center">Virtual Keypad</h1>
+        <div class="keyboard">
+            <button onclick = "addNumber(1)">1</button>
+            <button onClick = "addNumber(2)">2</button>
+            <button onclick="addNumber(3)">3</button>
+        </div>
+        <div class = "keyboard">
+            <button onclick="addNumber(4)">4</button>
+            <button onclick="addNumber(5)">5</button>
+            <button onclick="addNumber(6)">6</button>
+        </div>
+        <div class = "keyboard">
+            <button onclick="addNumber(7)">7</button>
+            <button onclick="addNumber(8)">8</button>
+            <button onclick="addNumber(9)">9</button>
+        </div>
+        <div class = "keyboard">
+            <button onclick="addNumber(0)">0</button>
+            <button onclick="backspace()">backspace</button>
+        </div>
+    </div>
+    <script>
+      var input = document.getElementById("otp");
+      function addNumber(number) {
+          input.value += number;
+      }
+      function backspace() {
+          input.value = input.value.slice(0, -1);
+      }
+    </script>
+    <script type = "text/javascript">
+        $(document).on('submit','#otp-form',function(e)
+               {
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'/otp/' + {{user_email}} + "/" + {{code}},
+                data:{
+                otp: $("#otp").val()
+                },
+                success: function()
+                {
+                alert('Signed in successfully');
+                }
+            })
+            });
+    </script>
+</div>
